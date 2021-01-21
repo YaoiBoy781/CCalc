@@ -1,0 +1,2 @@
+1.quit - exit from program
+2.help - handbook
