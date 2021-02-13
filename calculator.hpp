@@ -1,5 +1,5 @@
 #include <iostream>
 #include <deque>
-#include <cmath>
+#include "math.hpp"
 
-float calculator(std::deque<std::string> elements);
+long double calculator(std::deque<std::string> elements);

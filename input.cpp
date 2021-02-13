@@ -39,9 +39,22 @@ int inputString()
     else 
     {   
         std::deque<std::string>elements;
-        split(elements, inputString, " ");
         
-        std::cout << calculator(elements) << std::endl;;
+        if (!syntaxCheck(inputString))
+        {
+            split(elements, inputString);
+            
+            try
+            {
+                std::cout << calculator(elements) << std::endl;
+
+            }
+            catch(...)
+            {
+                std::cerr << "Syntax error!" << std::endl;
+            }
+            
+        }
     }
     
 

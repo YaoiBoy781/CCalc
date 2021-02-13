@@ -1,9 +1,9 @@
 #include "calculator.hpp"
 
-float calculator(std::deque<std::string> elements)
+long double calculator(std::deque<std::string> elements)
 {   
     std::deque<std::string> elements2;
-    float out;
+    long double out;
     bool find = false;
     int priorety = 0;
     int temp = 0;
@@ -12,12 +12,13 @@ float calculator(std::deque<std::string> elements)
     while (elements.size() != 1) 
     {
         while (i < elements.size())
-        {   
-            if (priorety == 0)
+        {   try
             {
-                if (elements[i + 1] == "^" && !find)
+            if (priorety == 0 && i + 1)
+            {
+                if (elements[i + 1] == "^" && !find && i + 1 < elements.size())
                 {
-                    out = pow(std::stof(elements[i]), std::stof(elements[i + 2])); 
+                    out = pow(std::stod(elements[i]), std::stod(elements[i + 2])); 
                     elements2.push_back(std::to_string(out));
                     find = true;
                     i += 2; 
@@ -31,17 +32,17 @@ float calculator(std::deque<std::string> elements)
 
             else if (priorety == 1)
             {
-                if (elements[i + 1] == "*" && !find)
+                if (elements[i + 1] == "*" && !find && i + 1 < elements.size())
                 {
-                    out = std::stof(elements[i]) * std::stof(elements[i + 2]); 
+                    out = std::stod(elements[i]) * std::stod(elements[i + 2]); 
                     elements2.push_back(std::to_string(out));
                     find = true;
                     i += 2; 
                 }
 
-                else if (elements[i + 1] == "/" && !find)
-                {
-                    out = std::stof(elements[i]) / std::stof(elements[i + 2]); 
+                else if (elements[i + 1] == "/" && !find && i + 1 < elements.size())
+                {   
+                    out = std::stod(elements[i]) / std::stod(elements[i + 2]); 
                     elements2.push_back(std::to_string(out));
                     find = true;
                     i += 2; 
@@ -55,17 +56,17 @@ float calculator(std::deque<std::string> elements)
 
             else if (priorety == 2)
             {
-                if (elements[i + 1] == "+" && !find)
+                if (elements[i + 1] == "+" && !find && i + 1 < elements.size())
                 {
-                    out = std::stof(elements[i]) + std::stof(elements[i + 2]); 
+                    out = std::stod(elements[i]) + std::stod(elements[i + 2]); 
                     elements2.push_back(std::to_string(out));
                     find = true;
                     i += 2; 
                 }
 
-                else if (elements[i + 1] == "-" && !find)
+                else if (elements[i + 1] == "-" && !find && i + 1 < elements.size())
                 {
-                    out = std::stof(elements[i]) - std::stof(elements[i + 2]); 
+                    out = std::stod(elements[i]) - std::stod(elements[i + 2]); 
                     elements2.push_back(std::to_string(out));
                     find = true;
                     i += 2; 
@@ -75,6 +76,11 @@ float calculator(std::deque<std::string> elements)
                 {
                     elements2.push_back(elements[i]);
                 }
+            }
+            }
+            catch(...)
+            {
+                throw "Syntax error";
             }
             i++;
         }
@@ -119,6 +125,5 @@ float calculator(std::deque<std::string> elements)
         i = 0;
 
     }
-    return std::stof(elements[0]);
+    return std::stod(elements[0]);
 }
-

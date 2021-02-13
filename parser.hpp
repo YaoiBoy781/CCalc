@@ -1,5 +1,17 @@
 #include <iostream>
-#include <string.h>
+#include <string>
 #include <deque>
 
-void split(std::deque<std::string> &elements, std::string &inputString, const char *sep);
+enum operations
+{
+    plus = *"+",
+    minus = *"-",
+    multiply = *"*",
+    division = *"/",
+    power = *"^",
+    bracket_right = *")",
+    bracket_left = *"("
+};
+
+bool syntaxCheck(std::string &inputString);
+void split (std::deque <std::string> &elements, std::string &inputString);
